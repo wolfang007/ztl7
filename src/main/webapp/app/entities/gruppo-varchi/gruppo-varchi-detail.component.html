@@ -1,0 +1,48 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="gruppoVarchi">
+            <h2><span>Gruppo Varchi</span> {{ gruppoVarchi.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Nome</span></dt>
+                <dd>
+                    <span>{{ gruppoVarchi.nome }}</span>
+                </dd>
+                <dt><span>Descrizione</span></dt>
+                <dd>
+                    <span>{{ gruppoVarchi.descrizione }}</span>
+                </dd>
+                <dt><span>Descrione Intervalli</span></dt>
+                <dd>
+                    <span>{{ gruppoVarchi.descrioneIntervalli }}</span>
+                </dd>
+                <dt><span>Stato</span></dt>
+                <dd>
+                    <span>{{ gruppoVarchi.stato }}</span>
+                </dd>
+                <dt><span>Posizione</span></dt>
+                <dd>
+                    <span *ngFor="let posizione of gruppoVarchi.posiziones; let last = last">
+                        <a [routerLink]="['/varco', posizione?.id, 'view']">{{ posizione.descrizionePosizione }}</a>{{ last ? '' : ', ' }}
+                    </span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/gruppo-varchi', gruppoVarchi.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

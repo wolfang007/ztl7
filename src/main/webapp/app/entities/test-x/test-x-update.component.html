@@ -1,0 +1,160 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-test-x-heading">Create or edit a Test X</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_xString">X String</label>
+                    <input type="text" class="form-control" name="xString" id="field_xString"
+                           formControlName="xString"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_xInteger">X Integer</label>
+                    <input type="number" class="form-control" name="xInteger" id="field_xInteger"
+                           formControlName="xInteger"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_xLong">X Long</label>
+                    <input type="number" class="form-control" name="xLong" id="field_xLong"
+                           formControlName="xLong"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_xBigDecimal">X Big Decimal</label>
+                    <input type="number" class="form-control" name="xBigDecimal" id="field_xBigDecimal"
+                           formControlName="xBigDecimal"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_xFloat">X Float</label>
+                    <input type="number" class="form-control" name="xFloat" id="field_xFloat"
+                           formControlName="xFloat"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_xDouble">X Double</label>
+                    <input type="number" class="form-control" name="xDouble" id="field_xDouble"
+                           formControlName="xDouble"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_xBoolean">X Boolean</label>
+                    <input type="checkbox" class="form-control" name="xBoolean" id="field_xBoolean"
+                           formControlName="xBoolean"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_xLocalDate">X Local Date</label>
+                    <div class="input-group">
+                        <input id="field_xLocalDate" type="text" class="form-control" name="xLocalDate" ngbDatepicker #xLocalDateDp="ngbDatepicker" formControlName="xLocalDate"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="xLocalDateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_xZonedDateTime">X Zoned Date Time</label>
+                    <div class="d-flex">
+                        <input id="field_xZonedDateTime" type="datetime-local" class="form-control" name="xZonedDateTime" formControlName="xZonedDateTime" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_xInstant">X Instant</label>
+                    <div class="d-flex">
+                        <input id="field_xInstant" type="datetime-local" class="form-control" name="xInstant" formControlName="xInstant" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_xUUID">X UUID</label>
+                    <input type="text" class="form-control" name="xUUID" id="field_xUUID"
+                           formControlName="xUUID"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_xBlob">X Blob</label>
+                    <div>
+                        <div *ngIf="editForm.get('xBlob')!.value" class="form-text text-danger clearfix">
+                            <a class="pull-left" (click)="openFile(editForm.get('xBlobContentType')!.value, editForm.get('xBlob')!.value)">open</a><br>
+                            <span class="pull-left">{{ editForm.get('xBlobContentType')!.value }}, {{ byteSize(editForm.get('xBlob')!.value) }}</span>
+                            <button type="button" (click)="editForm.patchValue({xBlob: null});editForm.patchValue({xBlobContentType: null});"
+                                    class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon icon="times"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_xBlob" (change)="setFileData($event, 'xBlob', false)"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="xBlob" id="field_xBlob"
+                           formControlName="xBlob"/>
+                    <input type="hidden" class="form-control" name="xBlobContentType" id="field_xBlobContentType"
+                           formControlName="xBlobContentType" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_xAnyBlob">X Any Blob</label>
+                    <div>
+                        <div *ngIf="editForm.get('xAnyBlob')!.value" class="form-text text-danger clearfix">
+                            <a class="pull-left" (click)="openFile(editForm.get('xAnyBlobContentType')!.value, editForm.get('xAnyBlob')!.value)">open</a><br>
+                            <span class="pull-left">{{ editForm.get('xAnyBlobContentType')!.value }}, {{ byteSize(editForm.get('xAnyBlob')!.value) }}</span>
+                            <button type="button" (click)="editForm.patchValue({xAnyBlob: null});editForm.patchValue({xAnyBlobContentType: null});"
+                                    class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon icon="times"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_xAnyBlob" (change)="setFileData($event, 'xAnyBlob', false)"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="xAnyBlob" id="field_xAnyBlob"
+                           formControlName="xAnyBlob"/>
+                    <input type="hidden" class="form-control" name="xAnyBlobContentType" id="field_xAnyBlobContentType"
+                           formControlName="xAnyBlobContentType" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_xImageBlob">X Image Blob</label>
+                    <div>
+                        <img [src]="'data:' + editForm.get('xImageBlobContentType')!.value + ';base64,' + editForm.get('xImageBlob')!.value" style="max-height: 100px;" *ngIf="editForm.get('xImageBlob')!.value" alt="testX image"/>
+                        <div *ngIf="editForm.get('xImageBlob')!.value" class="form-text text-danger clearfix">
+                            <span class="pull-left">{{ editForm.get('xImageBlobContentType')!.value }}, {{ byteSize(editForm.get('xImageBlob')!.value) }}</span>
+                            <button type="button" (click)="clearInputImage('xImageBlob', 'xImageBlobContentType', 'file_xImageBlob')" class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon icon="times"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_xImageBlob" (change)="setFileData($event, 'xImageBlob', true)" accept="image/*"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="xImageBlob" id="field_xImageBlob"
+                           formControlName="xImageBlob"/>
+                    <input type="hidden" class="form-control" name="xImageBlobContentType" id="field_xImageBlobContentType"
+                           formControlName="xImageBlobContentType" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_xTextBlob">X Text Blob</label>
+                    <textarea class="form-control" name="xTextBlob" id="field_xTextBlob"
+                              formControlName="xTextBlob"></textarea>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

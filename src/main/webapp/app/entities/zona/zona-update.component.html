@@ -1,0 +1,79 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-zona-heading">Create or edit a Zona</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_nome">Nome</label>
+                    <input type="text" class="form-control" name="nome" id="field_nome"
+                           formControlName="nome"/>
+                    <div *ngIf="editForm.get('nome')!.invalid && (editForm.get('nome')!.dirty || editForm.get('nome')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('nome')?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('nome')?.errors?.maxlength">
+                        This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_stato">Stato</label>
+                    <select class="form-control" name="stato" formControlName="stato" id="field_stato">
+                        <option value="ATTIVO">ATTIVO</option>
+                        <option value="DISATTIVO">DISATTIVO</option>
+                    </select>
+                    <div *ngIf="editForm.get('stato')!.invalid && (editForm.get('stato')!.dirty || editForm.get('stato')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('stato')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_profiloOrario">Profilo Orario</label>
+                    <select class="form-control" id="field_profiloOrario" name="profiloOrario" formControlName="profiloOrario">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="profiloOrarioOption.id === editForm.get('profiloOrario')!.value?.id ? editForm.get('profiloOrario')!.value : profiloOrarioOption" *ngFor="let profiloOrarioOption of profiloorarios; trackBy: trackById">{{ profiloOrarioOption.nome }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_tipologiaZona">Tipologia Zona</label>
+                    <select class="form-control" id="field_tipologiaZona" name="tipologiaZona" formControlName="tipologiaZona">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="tipologiaZonaOption.id === editForm.get('tipologiaZona')!.value?.id ? editForm.get('tipologiaZona')!.value : tipologiaZonaOption" *ngFor="let tipologiaZonaOption of tipologiazonas; trackBy: trackById">{{ tipologiaZonaOption.nome }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="field_gruppoVarchis">Gruppo Varchi</label>
+                    <select class="form-control" id="field_gruppoVarchis" multiple name="gruppoVarchis" formControlName="gruppoVarchis">
+                        <option [ngValue]="getSelected(editForm.get('gruppoVarchis')!.value, gruppoVarchiOption)" *ngFor="let gruppoVarchiOption of gruppovarchis; trackBy: trackById">{{ gruppoVarchiOption.nome }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

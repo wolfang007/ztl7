@@ -1,0 +1,182 @@
+DEFAULT_MIN_LENGTH = 4
+DEFAULT_MAX_LENGTH = 50
+
+entity TipologiaZona
+{
+  nome String required unique maxlength(50)
+  regoleCircolazione  TextBlob required 
+  stato EntityStatus required 
+}
+
+entity Varco {
+  codice String required unique maxlength(50)
+  descrizionePosizione String required unique maxlength(250)
+  stato EntityStatus required
+}
+
+entity GruppoVarchi {
+  nome String required unique maxlength(50)
+  descrizione String  maxlength(250)
+  descrioneIntervalli String
+  stato EntityStatus required
+}
+
+entity TipologiaVeicolo {
+  nome String  required unique maxlength(50)
+  stato EntityStatus required
+}
+
+entity Festivita {
+  nome LocalDate required unique
+}
+
+entity RegolaOraria {
+  nome String required unique maxlength(50)
+  oraInizio OreEnum required
+  oraFine OreEnum required
+  minutiInizio MinutiEnum required
+  minutiFine MinutiEnum required
+  lunedi Boolean
+  martedi Boolean
+  mercoledi Boolean
+  giovedi Boolean
+  venerdi Boolean
+  sabato Boolean
+  domenica Boolean
+  festivi Boolean
+  stato EntityStatus required
+}
+
+entity ProfiloOrario {
+  nome String required unique maxlength(50)
+  stato EntityStatus required
+}
+
+entity Autorizzazione {
+  nome String required unique maxlength(50)
+  descrizione String
+  stato EntityStatus required
+}
+
+entity Zona {
+  nome String required unique maxlength(50)
+  stato EntityStatus required
+}
+
+entity TipologiaPermesso {
+  nome String required unique
+  codice String required
+}
+
+entity DurataCosto {
+  durata String required unique maxlength(50)
+  descrizione String
+  costo Double
+}
+
+entity Motivazione {
+  descrizione String required unique maxlength(100)
+}
+
+entity Calendarizzazione {
+  lunedi  Boolean
+  martedi  Boolean
+  mercoledi  Boolean
+  giovedi  Boolean
+  venerdi  Boolean
+  sabato  Boolean
+  domenica  Boolean
+  siRipete  Boolean
+  festivi  Boolean  
+}
+
+entity TestX {
+  xString String
+  xInteger Integer 
+  xLong Long
+  xBigDecimal BigDecimal
+  xFloat Float
+  xDouble Double
+  xBoolean Boolean
+  xLocalDate LocalDate
+  xZonedDateTime ZonedDateTime
+  xInstant Instant
+  xUUID UUID
+  xBlob Blob
+  xAnyBlob AnyBlob
+  xImageBlob ImageBlob
+  xTextBlob TextBlob
+}
+
+
+entity PermessoTemporaneo {
+  targa String required maxlength(10)
+  domicilioDigitale String required maxlength(50)
+  tipoPersona TipoPersona
+  nomeRichiedente  String 
+  cognomeRichiedente String
+  ragioneSociale String
+  codiceFiscaleRichiedente String
+  partitaIva String
+  dataInizio LocalDate
+  impostaDiBollo Boolean
+  costo Double
+  copiaFirmata AnyBlob
+  documentoRiconoscimento AnyBlob
+  pagato Boolean
+  protocollo String
+}
+
+
+enum TipoPersona {
+    FISICA, GIURIDICA
+}
+
+enum EntityStatus {
+    ATTIVO, DISATTIVO
+}
+
+enum OreEnum {
+   ZERO ("0"), UNA ("1"), DUE ("2"), TRE ("3"), QUATTRO ("4"), CINQUE ("5"), SEI ("6"),  
+   SETTE ("7"),    OTTO ("8"), NOVE ("9"), DIECI ("10"),  UNDICI ("11"),  DODICI ("12"), 
+   TREDICI ("13"), QUATTORDICI ("14"), QUINDICI ("15"), SEDICI ("16"), DICIASETTE ("17"),  
+   DICIOTTO  ("18"), DICIANNOVE ("19"), VENTI ("20"), VENTUNO ("21"),  VENTIDUE ("22"),  
+   VENTITRE ("23")  
+}
+
+
+enum MinutiEnum {
+   QUINDICI ("15"), TRENTA ("30"), QUARANTACINQUE ("45"), SESSANTA ("60")
+}
+
+relationship OneToOne {
+  PermessoTemporaneo{calendario} to Calendarizzazione
+}
+
+relationship ManyToOne {
+  PermessoTemporaneo{tipoPermesso(nome)} to TipologiaPermesso
+  Zona{profiloOrario(nome)} to ProfiloOrario
+  Zona{tipologiaZona(nome)} to TipologiaZona
+  PermessoTemporaneo{durata(durata)} to DurataCosto
+  PermessoTemporaneo{nome(nome)} to Zona
+  PermessoTemporaneo{motivazione(descrizione)} to Motivazione
+}
+
+relationship ManyToMany {
+ GruppoVarchi{posizione(descrizionePosizione)} to Varco{gruppoVarchi}
+ Zona{gruppoVarchi(nome)} to GruppoVarchi{zona}
+ RegolaOraria{tipologiaVeicolo(nome)} to TipologiaVeicolo{regolaOraria}
+ ProfiloOrario{regolaOraria(nome)} to RegolaOraria{profiloOrario}
+ PermessoTemporaneo{autorizzazioni(nome)} to Autorizzazione{permessoTemporaneo}
+
+
+}
+
+filter TipologiaZona, Varco, GruppoVarchi, TipologiaVeicolo, Festivita, RegolaOraria, ProfiloOrario, Autorizzazione, Zona, TipologiaPermesso, 
+DurataCosto, Motivazione, Calendarizzazione, PermessoTemporaneo
+
+paginate TipologiaZona, Varco, GruppoVarchi, TipologiaVeicolo, Festivita, RegolaOraria, ProfiloOrario, Autorizzazione, Zona, TipologiaPermesso, 
+DurataCosto, Motivazione, Calendarizzazione, PermessoTemporaneo with pagination
+
+service all with serviceImpl
+

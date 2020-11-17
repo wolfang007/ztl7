@@ -1,0 +1,81 @@
+{
+  "name": "TestX",
+  "fields": [
+    {
+      "fieldName": "xString",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "xInteger",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "xLong",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "xBigDecimal",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "xFloat",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "xDouble",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "xBoolean",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "xLocalDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "xZonedDateTime",
+      "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldName": "xInstant",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "xUUID",
+      "fieldType": "UUID"
+    },
+    {
+      "fieldName": "xBlob",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    },
+    {
+      "fieldName": "xAnyBlob",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    },
+    {
+      "fieldName": "xImageBlob",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
+    },
+    {
+      "fieldName": "xTextBlob",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    }
+  ],
+  "relationships": [],
+  "changelogDate": "20201117183030",
+  "entityTableName": "test_x",
+  "dto": "no",
+  "pagination": "no",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

@@ -1,0 +1,77 @@
+<div>
+    <h2 id="page-heading">
+        <span>Gruppo Varchis</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-gruppo-varchi" [routerLink]="['/gruppo-varchi/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span>
+            Create a new Gruppo Varchi
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="gruppoVarchis?.length === 0">
+        <span>No gruppoVarchis found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="gruppoVarchis && gruppoVarchis.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="nome"><span>Nome</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="descrizione"><span>Descrizione</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="descrioneIntervalli"><span>Descrione Intervalli</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="stato"><span>Stato</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let gruppoVarchi of gruppoVarchis ;trackBy: trackId">
+                    <td><a [routerLink]="['/gruppo-varchi', gruppoVarchi.id, 'view']">{{ gruppoVarchi.id }}</a></td>
+                    <td>{{ gruppoVarchi.nome }}</td>
+                    <td>{{ gruppoVarchi.descrizione }}</td>
+                    <td>{{ gruppoVarchi.descrioneIntervalli }}</td>
+                    <td>{{ gruppoVarchi.stato }}</td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/gruppo-varchi', gruppoVarchi.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/gruppo-varchi', gruppoVarchi.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(gruppoVarchi)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="gruppoVarchis && gruppoVarchis.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,53 @@
+{
+  "name": "Calendarizzazione",
+  "fields": [
+    {
+      "fieldName": "lunedi",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "martedi",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "mercoledi",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "giovedi",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "venerdi",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "sabato",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "domenica",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "siRipete",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "festivi",
+      "fieldType": "Boolean"
+    }
+  ],
+  "relationships": [],
+  "changelogDate": "20201117182930",
+  "entityTableName": "calendarizzazione",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": true,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

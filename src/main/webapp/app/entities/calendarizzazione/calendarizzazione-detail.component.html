@@ -1,0 +1,62 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="calendarizzazione">
+            <h2><span>Calendarizzazione</span> {{ calendarizzazione.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Lunedi</span></dt>
+                <dd>
+                    <span>{{ calendarizzazione.lunedi }}</span>
+                </dd>
+                <dt><span>Martedi</span></dt>
+                <dd>
+                    <span>{{ calendarizzazione.martedi }}</span>
+                </dd>
+                <dt><span>Mercoledi</span></dt>
+                <dd>
+                    <span>{{ calendarizzazione.mercoledi }}</span>
+                </dd>
+                <dt><span>Giovedi</span></dt>
+                <dd>
+                    <span>{{ calendarizzazione.giovedi }}</span>
+                </dd>
+                <dt><span>Venerdi</span></dt>
+                <dd>
+                    <span>{{ calendarizzazione.venerdi }}</span>
+                </dd>
+                <dt><span>Sabato</span></dt>
+                <dd>
+                    <span>{{ calendarizzazione.sabato }}</span>
+                </dd>
+                <dt><span>Domenica</span></dt>
+                <dd>
+                    <span>{{ calendarizzazione.domenica }}</span>
+                </dd>
+                <dt><span>Si Ripete</span></dt>
+                <dd>
+                    <span>{{ calendarizzazione.siRipete }}</span>
+                </dd>
+                <dt><span>Festivi</span></dt>
+                <dd>
+                    <span>{{ calendarizzazione.festivi }}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/calendarizzazione', calendarizzazione.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

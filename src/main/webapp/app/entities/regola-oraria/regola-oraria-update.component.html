@@ -1,0 +1,215 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-regola-oraria-heading">Create or edit a Regola Oraria</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_nome">Nome</label>
+                    <input type="text" class="form-control" name="nome" id="field_nome"
+                           formControlName="nome"/>
+                    <div *ngIf="editForm.get('nome')!.invalid && (editForm.get('nome')!.dirty || editForm.get('nome')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('nome')?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('nome')?.errors?.maxlength">
+                        This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_oraInizio">Ora Inizio</label>
+                    <select class="form-control" name="oraInizio" formControlName="oraInizio" id="field_oraInizio">
+                        <option value="ZERO">0</option>
+                        <option value="UNA">1</option>
+                        <option value="DUE">2</option>
+                        <option value="TRE">3</option>
+                        <option value="QUATTRO">4</option>
+                        <option value="CINQUE">5</option>
+                        <option value="SEI">6</option>
+                        <option value="SETTE">7</option>
+                        <option value="OTTO">8</option>
+                        <option value="NOVE">9</option>
+                        <option value="DIECI">10</option>
+                        <option value="UNDICI">11</option>
+                        <option value="DODICI">12</option>
+                        <option value="TREDICI">13</option>
+                        <option value="QUATTORDICI">14</option>
+                        <option value="QUINDICI">15</option>
+                        <option value="SEDICI">16</option>
+                        <option value="DICIASETTE">17</option>
+                        <option value="DICIOTTO">18</option>
+                        <option value="DICIANNOVE">19</option>
+                        <option value="VENTI">20</option>
+                        <option value="VENTUNO">21</option>
+                        <option value="VENTIDUE">22</option>
+                        <option value="VENTITRE">23</option>
+                    </select>
+                    <div *ngIf="editForm.get('oraInizio')!.invalid && (editForm.get('oraInizio')!.dirty || editForm.get('oraInizio')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('oraInizio')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_oraFine">Ora Fine</label>
+                    <select class="form-control" name="oraFine" formControlName="oraFine" id="field_oraFine">
+                        <option value="ZERO">0</option>
+                        <option value="UNA">1</option>
+                        <option value="DUE">2</option>
+                        <option value="TRE">3</option>
+                        <option value="QUATTRO">4</option>
+                        <option value="CINQUE">5</option>
+                        <option value="SEI">6</option>
+                        <option value="SETTE">7</option>
+                        <option value="OTTO">8</option>
+                        <option value="NOVE">9</option>
+                        <option value="DIECI">10</option>
+                        <option value="UNDICI">11</option>
+                        <option value="DODICI">12</option>
+                        <option value="TREDICI">13</option>
+                        <option value="QUATTORDICI">14</option>
+                        <option value="QUINDICI">15</option>
+                        <option value="SEDICI">16</option>
+                        <option value="DICIASETTE">17</option>
+                        <option value="DICIOTTO">18</option>
+                        <option value="DICIANNOVE">19</option>
+                        <option value="VENTI">20</option>
+                        <option value="VENTUNO">21</option>
+                        <option value="VENTIDUE">22</option>
+                        <option value="VENTITRE">23</option>
+                    </select>
+                    <div *ngIf="editForm.get('oraFine')!.invalid && (editForm.get('oraFine')!.dirty || editForm.get('oraFine')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('oraFine')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_minutiInizio">Minuti Inizio</label>
+                    <select class="form-control" name="minutiInizio" formControlName="minutiInizio" id="field_minutiInizio">
+                        <option value="QUINDICI">15</option>
+                        <option value="TRENTA">30</option>
+                        <option value="QUARANTACINQUE">45</option>
+                        <option value="SESSANTA">60</option>
+                    </select>
+                    <div *ngIf="editForm.get('minutiInizio')!.invalid && (editForm.get('minutiInizio')!.dirty || editForm.get('minutiInizio')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('minutiInizio')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_minutiFine">Minuti Fine</label>
+                    <select class="form-control" name="minutiFine" formControlName="minutiFine" id="field_minutiFine">
+                        <option value="QUINDICI">15</option>
+                        <option value="TRENTA">30</option>
+                        <option value="QUARANTACINQUE">45</option>
+                        <option value="SESSANTA">60</option>
+                    </select>
+                    <div *ngIf="editForm.get('minutiFine')!.invalid && (editForm.get('minutiFine')!.dirty || editForm.get('minutiFine')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('minutiFine')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_lunedi">Lunedi</label>
+                    <input type="checkbox" class="form-control" name="lunedi" id="field_lunedi"
+                           formControlName="lunedi"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_martedi">Martedi</label>
+                    <input type="checkbox" class="form-control" name="martedi" id="field_martedi"
+                           formControlName="martedi"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_mercoledi">Mercoledi</label>
+                    <input type="checkbox" class="form-control" name="mercoledi" id="field_mercoledi"
+                           formControlName="mercoledi"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_giovedi">Giovedi</label>
+                    <input type="checkbox" class="form-control" name="giovedi" id="field_giovedi"
+                           formControlName="giovedi"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_venerdi">Venerdi</label>
+                    <input type="checkbox" class="form-control" name="venerdi" id="field_venerdi"
+                           formControlName="venerdi"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_sabato">Sabato</label>
+                    <input type="checkbox" class="form-control" name="sabato" id="field_sabato"
+                           formControlName="sabato"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_domenica">Domenica</label>
+                    <input type="checkbox" class="form-control" name="domenica" id="field_domenica"
+                           formControlName="domenica"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_festivi">Festivi</label>
+                    <input type="checkbox" class="form-control" name="festivi" id="field_festivi"
+                           formControlName="festivi"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_stato">Stato</label>
+                    <select class="form-control" name="stato" formControlName="stato" id="field_stato">
+                        <option value="ATTIVO">ATTIVO</option>
+                        <option value="DISATTIVO">DISATTIVO</option>
+                    </select>
+                    <div *ngIf="editForm.get('stato')!.invalid && (editForm.get('stato')!.dirty || editForm.get('stato')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('stato')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="field_tipologiaVeicolos">Tipologia Veicolo</label>
+                    <select class="form-control" id="field_tipologiaVeicolos" multiple name="tipologiaVeicolos" formControlName="tipologiaVeicolos">
+                        <option [ngValue]="getSelected(editForm.get('tipologiaVeicolos')!.value, tipologiaVeicoloOption)" *ngFor="let tipologiaVeicoloOption of tipologiaveicolos; trackBy: trackById">{{ tipologiaVeicoloOption.nome }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

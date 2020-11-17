@@ -1,0 +1,38 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="varco">
+            <h2><span>Varco</span> {{ varco.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Codice</span></dt>
+                <dd>
+                    <span>{{ varco.codice }}</span>
+                </dd>
+                <dt><span>Descrizione Posizione</span></dt>
+                <dd>
+                    <span>{{ varco.descrizionePosizione }}</span>
+                </dd>
+                <dt><span>Stato</span></dt>
+                <dd>
+                    <span>{{ varco.stato }}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/varco', varco.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,135 @@
+{
+  "name": "PermessoTemporaneo",
+  "fields": [
+    {
+      "fieldName": "targa",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required",
+        "maxlength"
+      ],
+      "fieldValidateRulesMaxlength": "10"
+    },
+    {
+      "fieldName": "domicilioDigitale",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required",
+        "maxlength"
+      ],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "tipoPersona",
+      "fieldType": "TipoPersona",
+      "fieldValues": "FISICA,GIURIDICA"
+    },
+    {
+      "fieldName": "nomeRichiedente",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "cognomeRichiedente",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "ragioneSociale",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "codiceFiscaleRichiedente",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "partitaIva",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "dataInizio",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "impostaDiBollo",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "costo",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "copiaFirmata",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    },
+    {
+      "fieldName": "documentoRiconoscimento",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    },
+    {
+      "fieldName": "pagato",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "protocollo",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "calendarizzazione",
+      "otherEntityRelationshipName": "permessoTemporaneo",
+      "relationshipName": "calendario",
+      "otherEntityField": "id",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "tipologiaPermesso",
+      "otherEntityRelationshipName": "permessoTemporaneo",
+      "relationshipName": "tipoPermesso",
+      "otherEntityField": "nome"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "durataCosto",
+      "otherEntityRelationshipName": "permessoTemporaneo",
+      "relationshipName": "durata",
+      "otherEntityField": "durata"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "zona",
+      "otherEntityRelationshipName": "permessoTemporaneo",
+      "relationshipName": "nome",
+      "otherEntityField": "nome"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "motivazione",
+      "otherEntityRelationshipName": "permessoTemporaneo",
+      "relationshipName": "motivazione",
+      "otherEntityField": "descrizione"
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "autorizzazione",
+      "otherEntityRelationshipName": "permessoTemporaneo",
+      "relationshipName": "autorizzazioni",
+      "otherEntityField": "nome",
+      "ownerSide": true
+    }
+  ],
+  "changelogDate": "20201117183130",
+  "entityTableName": "permesso_temporaneo",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": true,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

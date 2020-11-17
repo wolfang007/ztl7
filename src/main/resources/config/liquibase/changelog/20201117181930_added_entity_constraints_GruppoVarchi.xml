@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+    <!--
+        Added the constraints for entity GruppoVarchi.
+    -->
+    <changeSet id="20201117181930-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="gruppo_varchi_id"
+                                 baseTableName="gruppo_varchi_posizione"
+                                 constraintName="fk_gruppo_varchi_posizione_gruppo_varchi_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="gruppo_varchi"/>
+
+        <addForeignKeyConstraint baseColumnNames="posizione_id"
+                                 baseTableName="gruppo_varchi_posizione"
+                                 constraintName="fk_gruppo_varchi_posizione_posizione_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="varco"/>
+        
+    </changeSet>
+</databaseChangeLog>

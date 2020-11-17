@@ -1,0 +1,128 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="permessoTemporaneo">
+            <h2><span>Permesso Temporaneo</span> {{ permessoTemporaneo.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Targa</span></dt>
+                <dd>
+                    <span>{{ permessoTemporaneo.targa }}</span>
+                </dd>
+                <dt><span>Domicilio Digitale</span></dt>
+                <dd>
+                    <span>{{ permessoTemporaneo.domicilioDigitale }}</span>
+                </dd>
+                <dt><span>Tipo Persona</span></dt>
+                <dd>
+                    <span>{{ permessoTemporaneo.tipoPersona }}</span>
+                </dd>
+                <dt><span>Nome Richiedente</span></dt>
+                <dd>
+                    <span>{{ permessoTemporaneo.nomeRichiedente }}</span>
+                </dd>
+                <dt><span>Cognome Richiedente</span></dt>
+                <dd>
+                    <span>{{ permessoTemporaneo.cognomeRichiedente }}</span>
+                </dd>
+                <dt><span>Ragione Sociale</span></dt>
+                <dd>
+                    <span>{{ permessoTemporaneo.ragioneSociale }}</span>
+                </dd>
+                <dt><span>Codice Fiscale Richiedente</span></dt>
+                <dd>
+                    <span>{{ permessoTemporaneo.codiceFiscaleRichiedente }}</span>
+                </dd>
+                <dt><span>Partita Iva</span></dt>
+                <dd>
+                    <span>{{ permessoTemporaneo.partitaIva }}</span>
+                </dd>
+                <dt><span>Data Inizio</span></dt>
+                <dd>
+                    <span>{{ permessoTemporaneo.dataInizio }}</span>
+                </dd>
+                <dt><span>Imposta Di Bollo</span></dt>
+                <dd>
+                    <span>{{ permessoTemporaneo.impostaDiBollo }}</span>
+                </dd>
+                <dt><span>Costo</span></dt>
+                <dd>
+                    <span>{{ permessoTemporaneo.costo }}</span>
+                </dd>
+                <dt><span>Copia Firmata</span></dt>
+                <dd>
+                    <div *ngIf="permessoTemporaneo.copiaFirmata">
+                        <a (click)="openFile(permessoTemporaneo.copiaFirmataContentType, permessoTemporaneo.copiaFirmata)">open</a>
+                        {{ permessoTemporaneo.copiaFirmataContentType }}, {{ byteSize(permessoTemporaneo.copiaFirmata) }}
+                    </div>
+                </dd>
+                <dt><span>Documento Riconoscimento</span></dt>
+                <dd>
+                    <div *ngIf="permessoTemporaneo.documentoRiconoscimento">
+                        <a (click)="openFile(permessoTemporaneo.documentoRiconoscimentoContentType, permessoTemporaneo.documentoRiconoscimento)">open</a>
+                        {{ permessoTemporaneo.documentoRiconoscimentoContentType }}, {{ byteSize(permessoTemporaneo.documentoRiconoscimento) }}
+                    </div>
+                </dd>
+                <dt><span>Pagato</span></dt>
+                <dd>
+                    <span>{{ permessoTemporaneo.pagato }}</span>
+                </dd>
+                <dt><span>Protocollo</span></dt>
+                <dd>
+                    <span>{{ permessoTemporaneo.protocollo }}</span>
+                </dd>
+                <dt><span>Calendario</span></dt>
+                <dd>
+                    <div *ngIf="permessoTemporaneo.calendario">
+                        <a [routerLink]="['/calendarizzazione', permessoTemporaneo.calendario?.id, 'view']">{{ permessoTemporaneo.calendario?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span>Tipo Permesso</span></dt>
+                <dd>
+                    <div *ngIf="permessoTemporaneo.tipoPermesso">
+                        <a [routerLink]="['/tipologia-permesso', permessoTemporaneo.tipoPermesso?.id, 'view']">{{ permessoTemporaneo.tipoPermesso?.nome }}</a>
+                    </div>
+                </dd>
+                <dt><span>Durata</span></dt>
+                <dd>
+                    <div *ngIf="permessoTemporaneo.durata">
+                        <a [routerLink]="['/durata-costo', permessoTemporaneo.durata?.id, 'view']">{{ permessoTemporaneo.durata?.durata }}</a>
+                    </div>
+                </dd>
+                <dt><span>Nome</span></dt>
+                <dd>
+                    <div *ngIf="permessoTemporaneo.nome">
+                        <a [routerLink]="['/zona', permessoTemporaneo.nome?.id, 'view']">{{ permessoTemporaneo.nome?.nome }}</a>
+                    </div>
+                </dd>
+                <dt><span>Motivazione</span></dt>
+                <dd>
+                    <div *ngIf="permessoTemporaneo.motivazione">
+                        <a [routerLink]="['/motivazione', permessoTemporaneo.motivazione?.id, 'view']">{{ permessoTemporaneo.motivazione?.descrizione }}</a>
+                    </div>
+                </dd>
+                <dt><span>Autorizzazioni</span></dt>
+                <dd>
+                    <span *ngFor="let autorizzazioni of permessoTemporaneo.autorizzazionis; let last = last">
+                        <a [routerLink]="['/autorizzazione', autorizzazioni?.id, 'view']">{{ autorizzazioni.nome }}</a>{{ last ? '' : ', ' }}
+                    </span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/permesso-temporaneo', permessoTemporaneo.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

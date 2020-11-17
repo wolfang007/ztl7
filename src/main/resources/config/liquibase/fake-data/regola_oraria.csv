@@ -1,0 +1,11 @@
+id;nome;ora_inizio;ora_fine;minuti_inizio;minuti_fine;lunedi;martedi;mercoledi;giovedi;venerdi;sabato;domenica;festivi;stato
+1;Bike Ergonomic Rubber Fish Uganda Shilling;VENTI;NOVE;QUARANTACINQUE;SESSANTA;false;false;false;false;true;false;false;false;DISATTIVO
+2;deploy SCSI primary;DODICI;CINQUE;SESSANTA;TRENTA;true;false;true;false;false;true;false;true;ATTIVO
+3;solid state;VENTI;UNDICI;QUINDICI;TRENTA;true;true;true;false;true;false;true;true;ATTIVO
+4;teal Lead;DICIASETTE;OTTO;TRENTA;QUINDICI;false;false;true;true;true;false;true;true;DISATTIVO
+5;Money Market Account local pink;OTTO;QUATTRO;QUARANTACINQUE;QUINDICI;false;true;true;false;true;false;true;true;DISATTIVO
+6;Data;TRE;DICIOTTO;QUARANTACINQUE;QUINDICI;true;true;true;false;true;true;false;true;DISATTIVO
+7;implement;UNDICI;SETTE;SESSANTA;TRENTA;false;false;true;false;false;true;false;true;DISATTIVO
+8;Practical Up-sized web-readiness;SETTE;QUINDICI;QUINDICI;SESSANTA;false;false;true;true;false;true;false;true;ATTIVO
+9;Planner invoice;QUATTORDICI;OTTO;QUINDICI;SESSANTA;false;true;true;true;true;false;true;false;ATTIVO
+10;Refined Concrete Pizza Metal;DIECI;UNA;SESSANTA;SESSANTA;true;false;false;true;true;true;false;false;ATTIVO

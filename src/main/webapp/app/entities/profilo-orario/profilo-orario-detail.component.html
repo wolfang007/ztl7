@@ -1,0 +1,40 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="profiloOrario">
+            <h2><span>Profilo Orario</span> {{ profiloOrario.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Nome</span></dt>
+                <dd>
+                    <span>{{ profiloOrario.nome }}</span>
+                </dd>
+                <dt><span>Stato</span></dt>
+                <dd>
+                    <span>{{ profiloOrario.stato }}</span>
+                </dd>
+                <dt><span>Regola Oraria</span></dt>
+                <dd>
+                    <span *ngFor="let regolaOraria of profiloOrario.regolaOrarias; let last = last">
+                        <a [routerLink]="['/regola-oraria', regolaOraria?.id, 'view']">{{ regolaOraria.nome }}</a>{{ last ? '' : ', ' }}
+                    </span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/profilo-orario', profiloOrario.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

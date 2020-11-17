@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+    <!--
+        Added the constraints for entity PermessoTemporaneo.
+    -->
+    <changeSet id="20201117183130-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="calendario_id"
+                                 baseTableName="permesso_temporaneo"
+                                 constraintName="fk_permesso_temporaneo_calendario_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="calendarizzazione"/>
+
+        <addForeignKeyConstraint baseColumnNames="tipo_permesso_id"
+                                 baseTableName="permesso_temporaneo"
+                                 constraintName="fk_permesso_temporaneo_tipo_permesso_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tipologia_permesso"/>
+
+        <addForeignKeyConstraint baseColumnNames="durata_id"
+                                 baseTableName="permesso_temporaneo"
+                                 constraintName="fk_permesso_temporaneo_durata_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="durata_costo"/>
+
+        <addForeignKeyConstraint baseColumnNames="nome_id"
+                                 baseTableName="permesso_temporaneo"
+                                 constraintName="fk_permesso_temporaneo_nome_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="zona"/>
+
+        <addForeignKeyConstraint baseColumnNames="motivazione_id"
+                                 baseTableName="permesso_temporaneo"
+                                 constraintName="fk_permesso_temporaneo_motivazione_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="motivazione"/>
+
+        <addForeignKeyConstraint baseColumnNames="permesso_temporaneo_id"
+                                 baseTableName="permesso_temporaneo_autorizzazioni"
+                                 constraintName="fk_permesso_temporaneo_autorizzazioni_permesso_temporaneo_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="permesso_temporaneo"/>
+
+        <addForeignKeyConstraint baseColumnNames="autorizzazioni_id"
+                                 baseTableName="permesso_temporaneo_autorizzazioni"
+                                 constraintName="fk_permesso_temporaneo_autorizzazioni_autorizzazioni_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="autorizzazione"/>
+        
+    </changeSet>
+</databaseChangeLog>

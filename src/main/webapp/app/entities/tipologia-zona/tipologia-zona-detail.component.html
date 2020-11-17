@@ -1,0 +1,38 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="tipologiaZona">
+            <h2><span>Tipologia Zona</span> {{ tipologiaZona.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Nome</span></dt>
+                <dd>
+                    <span>{{ tipologiaZona.nome }}</span>
+                </dd>
+                <dt><span>Regole Circolazione</span></dt>
+                <dd>
+                    <span>{{ tipologiaZona.regoleCircolazione }}</span>
+                </dd>
+                <dt><span>Stato</span></dt>
+                <dd>
+                    <span>{{ tipologiaZona.stato }}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/tipologia-zona', tipologiaZona.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

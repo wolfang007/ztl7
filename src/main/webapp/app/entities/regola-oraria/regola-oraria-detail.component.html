@@ -1,0 +1,88 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="regolaOraria">
+            <h2><span>Regola Oraria</span> {{ regolaOraria.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Nome</span></dt>
+                <dd>
+                    <span>{{ regolaOraria.nome }}</span>
+                </dd>
+                <dt><span>Ora Inizio</span></dt>
+                <dd>
+                    <span>{{ regolaOraria.oraInizio }}</span>
+                </dd>
+                <dt><span>Ora Fine</span></dt>
+                <dd>
+                    <span>{{ regolaOraria.oraFine }}</span>
+                </dd>
+                <dt><span>Minuti Inizio</span></dt>
+                <dd>
+                    <span>{{ regolaOraria.minutiInizio }}</span>
+                </dd>
+                <dt><span>Minuti Fine</span></dt>
+                <dd>
+                    <span>{{ regolaOraria.minutiFine }}</span>
+                </dd>
+                <dt><span>Lunedi</span></dt>
+                <dd>
+                    <span>{{ regolaOraria.lunedi }}</span>
+                </dd>
+                <dt><span>Martedi</span></dt>
+                <dd>
+                    <span>{{ regolaOraria.martedi }}</span>
+                </dd>
+                <dt><span>Mercoledi</span></dt>
+                <dd>
+                    <span>{{ regolaOraria.mercoledi }}</span>
+                </dd>
+                <dt><span>Giovedi</span></dt>
+                <dd>
+                    <span>{{ regolaOraria.giovedi }}</span>
+                </dd>
+                <dt><span>Venerdi</span></dt>
+                <dd>
+                    <span>{{ regolaOraria.venerdi }}</span>
+                </dd>
+                <dt><span>Sabato</span></dt>
+                <dd>
+                    <span>{{ regolaOraria.sabato }}</span>
+                </dd>
+                <dt><span>Domenica</span></dt>
+                <dd>
+                    <span>{{ regolaOraria.domenica }}</span>
+                </dd>
+                <dt><span>Festivi</span></dt>
+                <dd>
+                    <span>{{ regolaOraria.festivi }}</span>
+                </dd>
+                <dt><span>Stato</span></dt>
+                <dd>
+                    <span>{{ regolaOraria.stato }}</span>
+                </dd>
+                <dt><span>Tipologia Veicolo</span></dt>
+                <dd>
+                    <span *ngFor="let tipologiaVeicolo of regolaOraria.tipologiaVeicolos; let last = last">
+                        <a [routerLink]="['/tipologia-veicolo', tipologiaVeicolo?.id, 'view']">{{ tipologiaVeicolo.nome }}</a>{{ last ? '' : ', ' }}
+                    </span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/regola-oraria', regolaOraria.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

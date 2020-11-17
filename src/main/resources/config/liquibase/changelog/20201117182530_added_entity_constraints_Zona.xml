@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+    <!--
+        Added the constraints for entity Zona.
+    -->
+    <changeSet id="20201117182530-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="profilo_orario_id"
+                                 baseTableName="zona"
+                                 constraintName="fk_zona_profilo_orario_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="profilo_orario"/>
+
+        <addForeignKeyConstraint baseColumnNames="tipologia_zona_id"
+                                 baseTableName="zona"
+                                 constraintName="fk_zona_tipologia_zona_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tipologia_zona"/>
+
+        <addForeignKeyConstraint baseColumnNames="zona_id"
+                                 baseTableName="zona_gruppo_varchi"
+                                 constraintName="fk_zona_gruppo_varchi_zona_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="zona"/>
+
+        <addForeignKeyConstraint baseColumnNames="gruppo_varchi_id"
+                                 baseTableName="zona_gruppo_varchi"
+                                 constraintName="fk_zona_gruppo_varchi_gruppo_varchi_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="gruppo_varchi"/>
+        
+    </changeSet>
+</databaseChangeLog>

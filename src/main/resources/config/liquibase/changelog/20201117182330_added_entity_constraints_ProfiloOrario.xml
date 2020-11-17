@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+    <!--
+        Added the constraints for entity ProfiloOrario.
+    -->
+    <changeSet id="20201117182330-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="profilo_orario_id"
+                                 baseTableName="profilo_orario_regola_oraria"
+                                 constraintName="fk_profilo_orario_regola_oraria_profilo_orario_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="profilo_orario"/>
+
+        <addForeignKeyConstraint baseColumnNames="regola_oraria_id"
+                                 baseTableName="profilo_orario_regola_oraria"
+                                 constraintName="fk_profilo_orario_regola_oraria_regola_oraria_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="regola_oraria"/>
+        
+    </changeSet>
+</databaseChangeLog>

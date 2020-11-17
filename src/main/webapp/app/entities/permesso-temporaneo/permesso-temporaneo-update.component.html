@@ -1,0 +1,215 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-permesso-temporaneo-heading">Create or edit a Permesso Temporaneo</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_targa">Targa</label>
+                    <input type="text" class="form-control" name="targa" id="field_targa"
+                           formControlName="targa"/>
+                    <div *ngIf="editForm.get('targa')!.invalid && (editForm.get('targa')!.dirty || editForm.get('targa')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('targa')?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('targa')?.errors?.maxlength">
+                        This field cannot be longer than 10 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_domicilioDigitale">Domicilio Digitale</label>
+                    <input type="text" class="form-control" name="domicilioDigitale" id="field_domicilioDigitale"
+                           formControlName="domicilioDigitale"/>
+                    <div *ngIf="editForm.get('domicilioDigitale')!.invalid && (editForm.get('domicilioDigitale')!.dirty || editForm.get('domicilioDigitale')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('domicilioDigitale')?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('domicilioDigitale')?.errors?.maxlength">
+                        This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_tipoPersona">Tipo Persona</label>
+                    <select class="form-control" name="tipoPersona" formControlName="tipoPersona" id="field_tipoPersona">
+                        <option value="FISICA">FISICA</option>
+                        <option value="GIURIDICA">GIURIDICA</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_nomeRichiedente">Nome Richiedente</label>
+                    <input type="text" class="form-control" name="nomeRichiedente" id="field_nomeRichiedente"
+                           formControlName="nomeRichiedente"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_cognomeRichiedente">Cognome Richiedente</label>
+                    <input type="text" class="form-control" name="cognomeRichiedente" id="field_cognomeRichiedente"
+                           formControlName="cognomeRichiedente"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_ragioneSociale">Ragione Sociale</label>
+                    <input type="text" class="form-control" name="ragioneSociale" id="field_ragioneSociale"
+                           formControlName="ragioneSociale"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_codiceFiscaleRichiedente">Codice Fiscale Richiedente</label>
+                    <input type="text" class="form-control" name="codiceFiscaleRichiedente" id="field_codiceFiscaleRichiedente"
+                           formControlName="codiceFiscaleRichiedente"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_partitaIva">Partita Iva</label>
+                    <input type="text" class="form-control" name="partitaIva" id="field_partitaIva"
+                           formControlName="partitaIva"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_dataInizio">Data Inizio</label>
+                    <div class="input-group">
+                        <input id="field_dataInizio" type="text" class="form-control" name="dataInizio" ngbDatepicker #dataInizioDp="ngbDatepicker" formControlName="dataInizio"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="dataInizioDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_impostaDiBollo">Imposta Di Bollo</label>
+                    <input type="checkbox" class="form-control" name="impostaDiBollo" id="field_impostaDiBollo"
+                           formControlName="impostaDiBollo"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_costo">Costo</label>
+                    <input type="number" class="form-control" name="costo" id="field_costo"
+                           formControlName="costo"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_copiaFirmata">Copia Firmata</label>
+                    <div>
+                        <div *ngIf="editForm.get('copiaFirmata')!.value" class="form-text text-danger clearfix">
+                            <a class="pull-left" (click)="openFile(editForm.get('copiaFirmataContentType')!.value, editForm.get('copiaFirmata')!.value)">open</a><br>
+                            <span class="pull-left">{{ editForm.get('copiaFirmataContentType')!.value }}, {{ byteSize(editForm.get('copiaFirmata')!.value) }}</span>
+                            <button type="button" (click)="editForm.patchValue({copiaFirmata: null});editForm.patchValue({copiaFirmataContentType: null});"
+                                    class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon icon="times"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_copiaFirmata" (change)="setFileData($event, 'copiaFirmata', false)"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="copiaFirmata" id="field_copiaFirmata"
+                           formControlName="copiaFirmata"/>
+                    <input type="hidden" class="form-control" name="copiaFirmataContentType" id="field_copiaFirmataContentType"
+                           formControlName="copiaFirmataContentType" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_documentoRiconoscimento">Documento Riconoscimento</label>
+                    <div>
+                        <div *ngIf="editForm.get('documentoRiconoscimento')!.value" class="form-text text-danger clearfix">
+                            <a class="pull-left" (click)="openFile(editForm.get('documentoRiconoscimentoContentType')!.value, editForm.get('documentoRiconoscimento')!.value)">open</a><br>
+                            <span class="pull-left">{{ editForm.get('documentoRiconoscimentoContentType')!.value }}, {{ byteSize(editForm.get('documentoRiconoscimento')!.value) }}</span>
+                            <button type="button" (click)="editForm.patchValue({documentoRiconoscimento: null});editForm.patchValue({documentoRiconoscimentoContentType: null});"
+                                    class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon icon="times"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_documentoRiconoscimento" (change)="setFileData($event, 'documentoRiconoscimento', false)"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="documentoRiconoscimento" id="field_documentoRiconoscimento"
+                           formControlName="documentoRiconoscimento"/>
+                    <input type="hidden" class="form-control" name="documentoRiconoscimentoContentType" id="field_documentoRiconoscimentoContentType"
+                           formControlName="documentoRiconoscimentoContentType" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_pagato">Pagato</label>
+                    <input type="checkbox" class="form-control" name="pagato" id="field_pagato"
+                           formControlName="pagato"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_protocollo">Protocollo</label>
+                    <input type="text" class="form-control" name="protocollo" id="field_protocollo"
+                           formControlName="protocollo"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_calendario">Calendario</label>
+                    <select class="form-control" id="field_calendario" name="calendario" formControlName="calendario">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="calendarizzazioneOption.id === editForm.get('calendario')!.value?.id ? editForm.get('calendario')!.value : calendarizzazioneOption" *ngFor="let calendarizzazioneOption of calendarios; trackBy: trackById">{{ calendarizzazioneOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_tipoPermesso">Tipo Permesso</label>
+                    <select class="form-control" id="field_tipoPermesso" name="tipoPermesso" formControlName="tipoPermesso">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="tipologiaPermessoOption.id === editForm.get('tipoPermesso')!.value?.id ? editForm.get('tipoPermesso')!.value : tipologiaPermessoOption" *ngFor="let tipologiaPermessoOption of tipologiapermessos; trackBy: trackById">{{ tipologiaPermessoOption.nome }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_durata">Durata</label>
+                    <select class="form-control" id="field_durata" name="durata" formControlName="durata">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="durataCostoOption.id === editForm.get('durata')!.value?.id ? editForm.get('durata')!.value : durataCostoOption" *ngFor="let durataCostoOption of duratacostos; trackBy: trackById">{{ durataCostoOption.durata }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_nome">Nome</label>
+                    <select class="form-control" id="field_nome" name="nome" formControlName="nome">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="zonaOption.id === editForm.get('nome')!.value?.id ? editForm.get('nome')!.value : zonaOption" *ngFor="let zonaOption of zonas; trackBy: trackById">{{ zonaOption.nome }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_motivazione">Motivazione</label>
+                    <select class="form-control" id="field_motivazione" name="motivazione" formControlName="motivazione">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="motivazioneOption.id === editForm.get('motivazione')!.value?.id ? editForm.get('motivazione')!.value : motivazioneOption" *ngFor="let motivazioneOption of motivaziones; trackBy: trackById">{{ motivazioneOption.descrizione }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="field_autorizzazionis">Autorizzazioni</label>
+                    <select class="form-control" id="field_autorizzazionis" multiple name="autorizzazionis" formControlName="autorizzazionis">
+                        <option [ngValue]="getSelected(editForm.get('autorizzazionis')!.value, autorizzazioneOption)" *ngFor="let autorizzazioneOption of autorizzaziones; trackBy: trackById">{{ autorizzazioneOption.nome }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

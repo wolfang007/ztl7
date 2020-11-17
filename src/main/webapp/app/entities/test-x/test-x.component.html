@@ -1,0 +1,100 @@
+<div>
+    <h2 id="page-heading">
+        <span>Test XES</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-test-x" [routerLink]="['/test-x/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span>
+            Create a new Test X
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="testXES?.length === 0">
+        <span>No testXES found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="testXES && testXES.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr>
+                    <th scope="col" ><span>ID</span></th>
+                    <th scope="col" ><span>X String</span></th>
+                    <th scope="col" ><span>X Integer</span></th>
+                    <th scope="col" ><span>X Long</span></th>
+                    <th scope="col" ><span>X Big Decimal</span></th>
+                    <th scope="col" ><span>X Float</span></th>
+                    <th scope="col" ><span>X Double</span></th>
+                    <th scope="col" ><span>X Boolean</span></th>
+                    <th scope="col" ><span>X Local Date</span></th>
+                    <th scope="col" ><span>X Zoned Date Time</span></th>
+                    <th scope="col" ><span>X Instant</span></th>
+                    <th scope="col" ><span>X UUID</span></th>
+                    <th scope="col" ><span>X Blob</span></th>
+                    <th scope="col" ><span>X Any Blob</span></th>
+                    <th scope="col" ><span>X Image Blob</span></th>
+                    <th scope="col" ><span>X Text Blob</span></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let testX of testXES ;trackBy: trackId">
+                    <td><a [routerLink]="['/test-x', testX.id, 'view']">{{ testX.id }}</a></td>
+                    <td>{{ testX.xString }}</td>
+                    <td>{{ testX.xInteger }}</td>
+                    <td>{{ testX.xLong }}</td>
+                    <td>{{ testX.xBigDecimal }}</td>
+                    <td>{{ testX.xFloat }}</td>
+                    <td>{{ testX.xDouble }}</td>
+                    <td>{{ testX.xBoolean }}</td>
+                    <td>{{ testX.xLocalDate | date:'mediumDate' }}</td>
+                    <td>{{ testX.xZonedDateTime | date:'medium' }}</td>
+                    <td>{{ testX.xInstant | date:'medium' }}</td>
+                    <td>{{ testX.xUUID }}</td>
+                    <td>
+                        <a *ngIf="testX.xBlob" (click)="openFile(testX.xBlobContentType, testX.xBlob)">open</a>
+                        <span *ngIf="testX.xBlob">{{ testX.xBlobContentType }}, {{ byteSize(testX.xBlob) }}</span>
+                    </td>
+                    <td>
+                        <a *ngIf="testX.xAnyBlob" (click)="openFile(testX.xAnyBlobContentType, testX.xAnyBlob)">open</a>
+                        <span *ngIf="testX.xAnyBlob">{{ testX.xAnyBlobContentType }}, {{ byteSize(testX.xAnyBlob) }}</span>
+                    </td>
+                    <td>
+                        <a *ngIf="testX.xImageBlob" (click)="openFile(testX.xImageBlobContentType, testX.xImageBlob)">
+                            <img [src]="'data:' + testX.xImageBlobContentType + ';base64,' + testX.xImageBlob" style="max-height: 30px;" alt="testX image"/>
+                        </a>
+                        <span *ngIf="testX.xImageBlob">{{ testX.xImageBlobContentType }}, {{ byteSize(testX.xImageBlob) }}</span>
+                    </td>
+                    <td>{{ testX.xTextBlob }}</td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/test-x', testX.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/test-x', testX.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(testX)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

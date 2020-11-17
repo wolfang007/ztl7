@@ -1,0 +1,87 @@
+<div>
+    <h2 id="page-heading">
+        <span>Calendarizzaziones</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-calendarizzazione" [routerLink]="['/calendarizzazione/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span>
+            Create a new Calendarizzazione
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="calendarizzaziones?.length === 0">
+        <span>No calendarizzaziones found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="calendarizzaziones && calendarizzaziones.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="lunedi"><span>Lunedi</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="martedi"><span>Martedi</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="mercoledi"><span>Mercoledi</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="giovedi"><span>Giovedi</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="venerdi"><span>Venerdi</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="sabato"><span>Sabato</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="domenica"><span>Domenica</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="siRipete"><span>Si Ripete</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="festivi"><span>Festivi</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let calendarizzazione of calendarizzaziones ;trackBy: trackId">
+                    <td><a [routerLink]="['/calendarizzazione', calendarizzazione.id, 'view']">{{ calendarizzazione.id }}</a></td>
+                    <td>{{ calendarizzazione.lunedi }}</td>
+                    <td>{{ calendarizzazione.martedi }}</td>
+                    <td>{{ calendarizzazione.mercoledi }}</td>
+                    <td>{{ calendarizzazione.giovedi }}</td>
+                    <td>{{ calendarizzazione.venerdi }}</td>
+                    <td>{{ calendarizzazione.sabato }}</td>
+                    <td>{{ calendarizzazione.domenica }}</td>
+                    <td>{{ calendarizzazione.siRipete }}</td>
+                    <td>{{ calendarizzazione.festivi }}</td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/calendarizzazione', calendarizzazione.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/calendarizzazione', calendarizzazione.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(calendarizzazione)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="calendarizzaziones && calendarizzaziones.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,97 @@
+<div>
+    <h2 id="page-heading">
+        <span>Regola Orarias</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-regola-oraria" [routerLink]="['/regola-oraria/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span>
+            Create a new Regola Oraria
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="regolaOrarias?.length === 0">
+        <span>No regolaOrarias found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="regolaOrarias && regolaOrarias.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="nome"><span>Nome</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="oraInizio"><span>Ora Inizio</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="oraFine"><span>Ora Fine</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="minutiInizio"><span>Minuti Inizio</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="minutiFine"><span>Minuti Fine</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="lunedi"><span>Lunedi</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="martedi"><span>Martedi</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="mercoledi"><span>Mercoledi</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="giovedi"><span>Giovedi</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="venerdi"><span>Venerdi</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="sabato"><span>Sabato</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="domenica"><span>Domenica</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="festivi"><span>Festivi</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="stato"><span>Stato</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let regolaOraria of regolaOrarias ;trackBy: trackId">
+                    <td><a [routerLink]="['/regola-oraria', regolaOraria.id, 'view']">{{ regolaOraria.id }}</a></td>
+                    <td>{{ regolaOraria.nome }}</td>
+                    <td>{{ regolaOraria.oraInizio }}</td>
+                    <td>{{ regolaOraria.oraFine }}</td>
+                    <td>{{ regolaOraria.minutiInizio }}</td>
+                    <td>{{ regolaOraria.minutiFine }}</td>
+                    <td>{{ regolaOraria.lunedi }}</td>
+                    <td>{{ regolaOraria.martedi }}</td>
+                    <td>{{ regolaOraria.mercoledi }}</td>
+                    <td>{{ regolaOraria.giovedi }}</td>
+                    <td>{{ regolaOraria.venerdi }}</td>
+                    <td>{{ regolaOraria.sabato }}</td>
+                    <td>{{ regolaOraria.domenica }}</td>
+                    <td>{{ regolaOraria.festivi }}</td>
+                    <td>{{ regolaOraria.stato }}</td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/regola-oraria', regolaOraria.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/regola-oraria', regolaOraria.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(regolaOraria)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="regolaOrarias && regolaOrarias.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>

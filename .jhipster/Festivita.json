@@ -1,0 +1,25 @@
+{
+  "name": "Festivita",
+  "fields": [
+    {
+      "fieldName": "nome",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": [
+        "required",
+        "unique"
+      ]
+    }
+  ],
+  "relationships": [],
+  "changelogDate": "20201117182130",
+  "entityTableName": "festivita",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": true,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

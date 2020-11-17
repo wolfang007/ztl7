@@ -1,0 +1,135 @@
+<div>
+    <h2 id="page-heading">
+        <span>Permesso Temporaneos</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-permesso-temporaneo" [routerLink]="['/permesso-temporaneo/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span>
+            Create a new Permesso Temporaneo
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="permessoTemporaneos?.length === 0">
+        <span>No permessoTemporaneos found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="permessoTemporaneos && permessoTemporaneos.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="targa"><span>Targa</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="domicilioDigitale"><span>Domicilio Digitale</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="tipoPersona"><span>Tipo Persona</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="nomeRichiedente"><span>Nome Richiedente</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="cognomeRichiedente"><span>Cognome Richiedente</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="ragioneSociale"><span>Ragione Sociale</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="codiceFiscaleRichiedente"><span>Codice Fiscale Richiedente</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="partitaIva"><span>Partita Iva</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="dataInizio"><span>Data Inizio</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="impostaDiBollo"><span>Imposta Di Bollo</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="costo"><span>Costo</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="copiaFirmata"><span>Copia Firmata</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="documentoRiconoscimento"><span>Documento Riconoscimento</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="pagato"><span>Pagato</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="protocollo"><span>Protocollo</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="calendario.id"><span>Calendario</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="tipoPermesso.nome"><span>Tipo Permesso</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="durata.durata"><span>Durata</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="nome.nome"><span>Nome</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="motivazione.descrizione"><span>Motivazione</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let permessoTemporaneo of permessoTemporaneos ;trackBy: trackId">
+                    <td><a [routerLink]="['/permesso-temporaneo', permessoTemporaneo.id, 'view']">{{ permessoTemporaneo.id }}</a></td>
+                    <td>{{ permessoTemporaneo.targa }}</td>
+                    <td>{{ permessoTemporaneo.domicilioDigitale }}</td>
+                    <td>{{ permessoTemporaneo.tipoPersona }}</td>
+                    <td>{{ permessoTemporaneo.nomeRichiedente }}</td>
+                    <td>{{ permessoTemporaneo.cognomeRichiedente }}</td>
+                    <td>{{ permessoTemporaneo.ragioneSociale }}</td>
+                    <td>{{ permessoTemporaneo.codiceFiscaleRichiedente }}</td>
+                    <td>{{ permessoTemporaneo.partitaIva }}</td>
+                    <td>{{ permessoTemporaneo.dataInizio | date:'mediumDate' }}</td>
+                    <td>{{ permessoTemporaneo.impostaDiBollo }}</td>
+                    <td>{{ permessoTemporaneo.costo }}</td>
+                    <td>
+                        <a *ngIf="permessoTemporaneo.copiaFirmata" (click)="openFile(permessoTemporaneo.copiaFirmataContentType, permessoTemporaneo.copiaFirmata)">open</a>
+                        <span *ngIf="permessoTemporaneo.copiaFirmata">{{ permessoTemporaneo.copiaFirmataContentType }}, {{ byteSize(permessoTemporaneo.copiaFirmata) }}</span>
+                    </td>
+                    <td>
+                        <a *ngIf="permessoTemporaneo.documentoRiconoscimento" (click)="openFile(permessoTemporaneo.documentoRiconoscimentoContentType, permessoTemporaneo.documentoRiconoscimento)">open</a>
+                        <span *ngIf="permessoTemporaneo.documentoRiconoscimento">{{ permessoTemporaneo.documentoRiconoscimentoContentType }}, {{ byteSize(permessoTemporaneo.documentoRiconoscimento) }}</span>
+                    </td>
+                    <td>{{ permessoTemporaneo.pagato }}</td>
+                    <td>{{ permessoTemporaneo.protocollo }}</td>
+                    <td>
+                        <div *ngIf="permessoTemporaneo.calendario">
+                            <a [routerLink]="['/calendarizzazione', permessoTemporaneo.calendario?.id, 'view']" >{{ permessoTemporaneo.calendario?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="permessoTemporaneo.tipoPermesso">
+                            <a [routerLink]="['/tipologia-permesso', permessoTemporaneo.tipoPermesso?.id, 'view']" >{{ permessoTemporaneo.tipoPermesso?.nome }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="permessoTemporaneo.durata">
+                            <a [routerLink]="['/durata-costo', permessoTemporaneo.durata?.id, 'view']" >{{ permessoTemporaneo.durata?.durata }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="permessoTemporaneo.nome">
+                            <a [routerLink]="['/zona', permessoTemporaneo.nome?.id, 'view']" >{{ permessoTemporaneo.nome?.nome }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="permessoTemporaneo.motivazione">
+                            <a [routerLink]="['/motivazione', permessoTemporaneo.motivazione?.id, 'view']" >{{ permessoTemporaneo.motivazione?.descrizione }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/permesso-temporaneo', permessoTemporaneo.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/permesso-temporaneo', permessoTemporaneo.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(permessoTemporaneo)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="permessoTemporaneos && permessoTemporaneos.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>
